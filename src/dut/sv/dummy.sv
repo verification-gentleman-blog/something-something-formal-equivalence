@@ -29,4 +29,16 @@ module dummy(
   assign PREADY = 1;
   assign PSLVERR = (PADDR != 0);
 
+
+  bit [31:0] sfr0;
+
+  always @(posedge PCLK or negedge PRESETn)
+    if (!PRESETn)
+      sfr0 <= 0;
+    else if (PSEL && PENABLE && PWRITE)
+      if (PADDR == 0)
+        sfr0 <= PWDATA; // Bug: doesn't consider write strobes
+
+  assign PRDATA = sfr0;
+
 endmodule

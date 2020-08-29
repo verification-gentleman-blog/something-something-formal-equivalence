@@ -15,14 +15,20 @@
 
 module dummy_props(
     input bit PCLK,
+    input bit PRESETn,
     input bit PADDR,
     input bit PSEL,
     input bit PENABLE,
+    input bit PWRITE,
+    input bit [31:0] PWDATA,
     input bit PREADY,
+    input bit [31:0] PRDATA,
     input bit PSLVERR);
 
   default clocking @(posedge PCLK);
   endclocking
+
+  default disable iff (!PRESETn);
 
 
   always_ready: assert property (PREADY);
@@ -32,6 +38,12 @@ module dummy_props(
 
   no_error_for_known_addresses: assert property (
       PADDR == 0 && PSEL && PENABLE && PREADY |-> !PSLVERR);
+
+  writen_data_can_be_read_back: assert property (
+      PADDR == 0 && PSEL && PENABLE && PWRITE && PWDATA == 'hdead_beef && PREADY
+         ##1 !PSEL [*]
+         ##1 PADDR == 0 && PSEL && PENABLE && !PWRITE && PREADY
+         |-> PRDATA == 'hdead_beef);
 
 endmodule
 
