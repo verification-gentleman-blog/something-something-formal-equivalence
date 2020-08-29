@@ -15,13 +15,23 @@
 
 module dummy_props(
     input bit PCLK,
-    input bit PREADY);
+    input bit PADDR,
+    input bit PSEL,
+    input bit PENABLE,
+    input bit PREADY,
+    input bit PSLVERR);
 
   default clocking @(posedge PCLK);
   endclocking
 
 
   always_ready: assert property (PREADY);
+
+  error_for_unknown_addresses: assert property (
+      PADDR != 0 && PSEL && PENABLE && PREADY |-> PSLVERR);
+
+  no_error_for_known_addresses: assert property (
+      PADDR == 0 && PSEL && PENABLE && PREADY |-> !PSLVERR);
 
 endmodule
 

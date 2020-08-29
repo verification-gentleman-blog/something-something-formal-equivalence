@@ -27,5 +27,6 @@ module dummy(
     output bit PSLVERR);
 
   assign PREADY = 1;
+  assign PSLVERR = (PADDR != 0);
 
 endmodule
