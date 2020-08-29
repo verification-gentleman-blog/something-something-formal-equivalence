@@ -19,15 +19,12 @@ module equivalence_tb(
     input bit PSEL,
     input bit PENABLE);
 
-  dummy dut0(
-      .PCLK(PCLK),
-      .PRESETn(PRESETn),
-      .PSEL(PSEL),
-      .PENABLE(PENABLE));
-  dummy dut1(
-      .PCLK(PCLK),
-      .PRESETn(PRESETn),
-      .PSEL(PSEL),
-      .PENABLE(PENABLE));
+  for (genvar i = 0; i < 2; i++) begin: duts
+    dummy dut(
+        .PCLK(PCLK),
+        .PRESETn(PRESETn),
+        .PSEL(PSEL),
+        .PENABLE(PENABLE));
+  end
 
 endmodule

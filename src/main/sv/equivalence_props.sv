@@ -23,10 +23,11 @@ module equivalence_props(
   default disable iff (!PRESETn);
 
 
-  prdata_equivalent: assert property (dut0.PRDATA == dut1.PRDATA);
+  prdata_equivalent: assert property (duts[0].dut.PRDATA == duts[1].dut.PRDATA);
 
-  can_access_dut0: cover property (dut0.PSEL && dut0.PENABLE);
-  can_access_dut1: cover property (dut1.PSEL && dut1.PENABLE);
+  for (genvar i = 0; i < 2; i++) begin: covers
+    can_access_dut: cover property (duts[i].dut.PSEL && duts[i].dut.PENABLE);
+  end
 
 endmodule
 
