@@ -13,5 +13,17 @@
 // limitations under the License.
 
 
-module dummy(input bit clk);
+module dummy(
+    input bit PCLK,
+    input bit PRESETn,
+    input bit PADDR,
+    input bit PSEL,
+    input bit PENABLE,
+    input bit PWRITE,
+    input bit [31:0] PWDATA,
+    input bit [3:0] PSTRB,
+    output bit PREADY,
+    output bit [31:0] PRDATA,
+    output bit PSLVERR);
+
 endmodule

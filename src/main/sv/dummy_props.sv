@@ -13,9 +13,9 @@
 // limitations under the License.
 
 
-module dummy_props(input bit clk);
+module dummy_props(input bit PCLK);
 
-  default clocking @(posedge clk);
+  default clocking @(posedge PCLK);
   endclocking
 
 
