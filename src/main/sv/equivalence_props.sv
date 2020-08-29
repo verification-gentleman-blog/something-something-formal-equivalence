@@ -25,6 +25,9 @@ module equivalence_props(
 
   prdata_equivalent: assert property (dut0.PRDATA == dut1.PRDATA);
 
+  can_access_dut0: cover property (dut0.PSEL && dut0.PENABLE);
+  can_access_dut1: cover property (dut1.PSEL && dut1.PENABLE);
+
 endmodule
 
 

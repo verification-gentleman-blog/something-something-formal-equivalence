@@ -15,9 +15,19 @@
 
 module equivalence_tb(
     input bit PCLK,
-    input bit PRESETn);
+    input bit PRESETn,
+    input bit PSEL,
+    input bit PENABLE);
 
-  dummy dut0(.PCLK(PCLK), .PRESETn(PRESETn));
-  dummy dut1(.PCLK(PCLK), .PRESETn(PRESETn));
+  dummy dut0(
+      .PCLK(PCLK),
+      .PRESETn(PRESETn),
+      .PSEL(PSEL),
+      .PENABLE(PENABLE));
+  dummy dut1(
+      .PCLK(PCLK),
+      .PRESETn(PRESETn),
+      .PSEL(PSEL),
+      .PENABLE(PENABLE));
 
 endmodule
