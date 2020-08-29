@@ -19,6 +19,9 @@ module equivalence_tb(
     input struct {
       bit PSEL;
       bit PENABLE;
+      bit PWRITE;
+      bit [31:0] PWDATA;
+      bit [3:0] PSTRB;
     } sigs[2]);
 
   for (genvar i = 0; i < 2; i++) begin: duts
@@ -26,7 +29,10 @@ module equivalence_tb(
         .PCLK(PCLK),
         .PRESETn(PRESETn),
         .PSEL(sigs[i].PSEL),
-        .PENABLE(sigs[i].PENABLE));
+        .PENABLE(sigs[i].PENABLE),
+        .PWRITE(sigs[i].PWRITE),
+        .PWDATA(sigs[i].PWDATA),
+        .PSTRB(sigs[i].PSTRB));
   end
 
 endmodule

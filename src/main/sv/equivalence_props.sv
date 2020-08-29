@@ -27,6 +27,7 @@ module equivalence_props(
 
   for (genvar i = 0; i < 2; i++) begin: covers
     can_access_dut: cover property (sigs[i].PSEL && sigs[i].PENABLE);
+    can_write_to_dut: cover property (sigs[i].PSEL && sigs[i].PENABLE && sigs[i].PWRITE);
   end
 
 endmodule
