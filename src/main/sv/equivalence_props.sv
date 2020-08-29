@@ -25,7 +25,13 @@ module equivalence_props(
   psel_equivalent: assume property (duts[0].dut.PSEL == duts[1].dut.PSEL);
   penable_equivalent: assume property (duts[0].dut.PENABLE == duts[1].dut.PENABLE);
   pwrite_equivalent: assume property (duts[0].dut.PWRITE == duts[1].dut.PWRITE);
-  pwdata_equivalent: assume property (duts[0].dut.PWDATA == duts[1].dut.PWDATA);
+
+  for (genvar i = 0; i < 4; i++)
+    pwdata_byte_equivalent: assume property (
+        duts[0].dut.PWDATA[i*8 +: 8] == duts[1].dut.PWDATA[i*8 +: 8]
+            || duts[0].dut.PSTRB[i] == 0
+            || duts[1].dut.PSTRB[i] == 0);
+
   pstrb_equivalent: assume property (duts[0].dut.PSTRB == duts[1].dut.PSTRB);
 
   pready_equivalent: assert property (duts[0].dut.PREADY == duts[1].dut.PREADY);
