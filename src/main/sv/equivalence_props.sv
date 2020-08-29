@@ -22,6 +22,11 @@ module equivalence_props(
 
   default disable iff (!PRESETn);
 
+  psel_equivalent: assume property (duts[0].dut.PSEL == duts[1].dut.PSEL);
+  penable_equivalent: assume property (duts[0].dut.PENABLE == duts[1].dut.PENABLE);
+  pwrite_equivalent: assume property (duts[0].dut.PWRITE == duts[1].dut.PWRITE);
+  pwdata_equivalent: assume property (duts[0].dut.PWDATA == duts[1].dut.PWDATA);
+  pstrb_equivalent: assume property (duts[0].dut.PSTRB == duts[1].dut.PSTRB);
 
   prdata_equivalent: assert property (duts[0].dut.PRDATA == duts[1].dut.PRDATA);
 
