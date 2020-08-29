@@ -26,7 +26,7 @@ module equivalence_props(
   prdata_equivalent: assert property (duts[0].dut.PRDATA == duts[1].dut.PRDATA);
 
   for (genvar i = 0; i < 2; i++) begin: covers
-    can_access_dut: cover property (duts[i].dut.PSEL && duts[i].dut.PENABLE);
+    can_access_dut: cover property (sigs[i].PSEL && sigs[i].PENABLE);
   end
 
 endmodule

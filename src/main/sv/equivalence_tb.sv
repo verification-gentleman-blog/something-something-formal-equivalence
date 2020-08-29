@@ -16,15 +16,17 @@
 module equivalence_tb(
     input bit PCLK,
     input bit PRESETn,
-    input bit PSEL,
-    input bit PENABLE);
+    input struct {
+      bit PSEL;
+      bit PENABLE;
+    } sigs[2]);
 
   for (genvar i = 0; i < 2; i++) begin: duts
     dummy dut(
         .PCLK(PCLK),
         .PRESETn(PRESETn),
-        .PSEL(PSEL),
-        .PENABLE(PENABLE));
+        .PSEL(sigs[i].PSEL),
+        .PENABLE(sigs[i].PENABLE));
   end
 
 endmodule
