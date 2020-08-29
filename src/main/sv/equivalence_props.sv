@@ -28,7 +28,9 @@ module equivalence_props(
   pwdata_equivalent: assume property (duts[0].dut.PWDATA == duts[1].dut.PWDATA);
   pstrb_equivalent: assume property (duts[0].dut.PSTRB == duts[1].dut.PSTRB);
 
+  pready_equivalent: assert property (duts[0].dut.PREADY == duts[1].dut.PREADY);
   prdata_equivalent: assert property (duts[0].dut.PRDATA == duts[1].dut.PRDATA);
+  pslverr_equivalent: assert property (duts[0].dut.PSLVERR == duts[1].dut.PSLVERR);
 
   for (genvar i = 0; i < 2; i++) begin: covers
     can_access_dut: cover property (sigs[i].PSEL && sigs[i].PENABLE);
