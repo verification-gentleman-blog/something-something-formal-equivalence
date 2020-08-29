@@ -26,4 +26,6 @@ module dummy(
     output bit [31:0] PRDATA,
     output bit PSLVERR);
 
+  assign PREADY = 1;
+
 endmodule

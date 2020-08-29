@@ -13,13 +13,15 @@
 // limitations under the License.
 
 
-module dummy_props(input bit PCLK);
+module dummy_props(
+    input bit PCLK,
+    input bit PREADY);
 
   default clocking @(posedge PCLK);
   endclocking
 
 
-  passing_assert: assert property (1);
+  always_ready: assert property (PREADY);
 
 endmodule
 
